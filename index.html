@@ -116,7 +116,10 @@
   .tb-btn.active { background: var(--brand); color: #fff; border-color: var(--brand); }
   .tb-hint { font-size: 12px; color: var(--ink-3); }
 
-  .stats { display: flex; gap: 12px; margin: 22px 0 0; flex-wrap: wrap; }
+    .month-nav { display: flex; align-items: center; justify-content: center; gap: 16px; margin-top: 22px; }
+  .month-label { font-family: var(--font-display); font-size: 18px; font-weight: 600; min-width: 128px; text-align: center; }
+  .tb-btn:disabled { opacity: 0.4; cursor: default; }
+.stats { display: flex; gap: 12px; margin: 22px 0 0; flex-wrap: wrap; }
   .stat { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 15px 20px; min-width: 112px; box-shadow: var(--shadow); backdrop-filter: blur(8px); }
   .stat .num { font-family: var(--font-mono); font-size: 25px; font-weight: 500; color: var(--ink); line-height: 1.1; }
   .stat .lab { font-size: 12px; color: var(--ink-2); margin-top: 4px; }
@@ -218,7 +221,7 @@
       <img class="brand-mark" src="data:image/png;base64,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" alt="所徽">
       <div>
         <h1>Seismic Q</h1>
-        <div class="sub">课程表 · 2026年9月 · 学术沉淀期</div>
+        <div class="sub">课程表 · 学术沉淀期</div>
       </div>
     </div>
     <div class="legend">
@@ -232,14 +235,20 @@
     <a class="tb-btn primary" href="https://lcnldw5hwk7e.feishu.cn/share/base/form/shrcnM4SHr2Pjzqww4oBmwU9oug" target="_blank" rel="noopener">📝 提交更新申请</a>
   </div>
 
-  <div class="stats">
+      <div class="month-nav">
+      <button class="tb-btn" id="btn-prev">‹ 上月</button>
+      <span class="month-label" id="month-label">2026年9月</span>
+      <button class="tb-btn" id="btn-next">下月 ›</button>
+    </div>
+
+<div class="stats">
     <div class="stat"><div class="num" id="stat-periods">4</div><div class="lab">段学术沉淀期</div></div>
     <div class="stat"><div class="num" id="stat-days">10</div><div class="lab">标记天数</div></div>
     <div class="stat"><div class="num" id="stat-cities">3</div><div class="lab">涉及城市</div></div>
   </div>
 
   <div class="strip-wrap">
-    <div class="strip-label">九月 · 日视图</div>
+    <div class="strip-label" id="strip-label">2026年9月 · 日视图</div>
     <div class="strip" id="strip"></div>
     <div class="strip-ticks" id="stripTicks"></div>
   </div>
@@ -261,130 +270,156 @@
   </section>
 
   <div class="footnote">
-    节假日按国务院 2026 年安排标注（中秋节 9月25–27日，不调休）。如需更新或新增行程，请点击最上方的「提交更新申请」填写文本，管理员会定期查看并更新。数据截至 <b>2026-09-07</b>。
+    节假日按法定日期标注（2027年春节/劳动节等调休以官方公布为准）。如需更新或新增行程，请点击最上方的「提交更新申请」填写文本，管理员会定期查看并更新。数据截至 <b>2026-09-07</b>。
   </div>
 </main>
 
-<script>
-  // ==================== 数据（更新时改这里即可）====================
+<script>  // ==================== 数据 ====================
   const CHIP = { away: '学术沉淀期', depart: '当天沉淀' };
-  const HOLIDAYS = { 25: '中秋' }; // 2026-09-25 中秋节（法定假日，不调休）
+  const WEEKDAYS = ['周一', '周二', '周三', '周四', '周五', '周六', '周日'];
 
-  const BUILTIN_SCHEDULE = {
-    5:  { type: 'depart', city: '昆明', headline: '出发 · 昆明', detail: 'CA4172 · 11:55 → 15:25' },
-    6:  { type: 'away',   city: '昆明', headline: '昆明',       detail: '全天' },
-    7:  { type: 'away',   city: '昆明', headline: '返京 · 昆明', detail: 'CA4173 · 17:05 → 21:00' },
-    8:  { type: 'depart', city: '成都', headline: '出发 · 成都', detail: 'CA1407 · 16:45 → 19:40' },
-    9:  { type: 'away',   city: '成都', headline: '返京 · 成都', detail: 'CA4181 · 18:00 → 20:45' },
-    18: { type: 'away',   city: '西安', headline: '西安参会',    detail: '密集台阵研讨会 · 第1天' },
-    19: { type: 'away',   city: '西安', headline: '西安参会',    detail: '密集台阵研讨会 · 第2天' },
-    20: { type: 'away',   city: '西安', headline: '西安参会',    detail: '密集台阵研讨会 · 第3天' },
-    21: { type: 'away',   city: '西安', headline: '西安参会',    detail: '密集台阵研讨会 · 第4天' },
-    22: { type: 'away',   city: '成都', headline: '返京 · 成都', detail: 'CA4107 · 10:00 → 12:45' },
+  const HOLIDAYS = {
+    '2026-09': { 25: '中秋' },
+    '2026-10': { 1:'国庆',2:'国庆',3:'国庆',4:'国庆',5:'国庆',6:'国庆',7:'国庆' },
+    '2027-01': { 1: '元旦' },
+    '2027-02': { 6:'春节',7:'春节',8:'春节',9:'春节',10:'春节',11:'春节',12:'春节' },
+    '2027-04': { 5: '清明' },
+    '2027-05': { 1:'劳动节',2:'劳动节',3:'劳动节' },
+    '2027-06': { 9: '端午' }
   };
+
+  const SCHEDULE = {
+    '2026-09': {
+      5:  { type: 'depart', city: '昆明', headline: '出发 · 昆明', detail: 'CA4172 · 11:55 → 15:25' },
+      6:  { type: 'away',   city: '昆明', headline: '昆明',       detail: '全天' },
+      7:  { type: 'away',   city: '昆明', headline: '返京 · 昆明', detail: 'CA4173 · 17:05 → 21:00' },
+      8:  { type: 'depart', city: '成都', headline: '出发 · 成都', detail: 'CA1407 · 16:45 → 19:40' },
+      9:  { type: 'away',   city: '成都', headline: '返京 · 成都', detail: 'CA4181 · 18:00 → 20:45' },
+      18: { type: 'away',   city: '西安', headline: '西安参会',    detail: '密集台阵研讨会 · 第1天' },
+      19: { type: 'away',   city: '西安', headline: '西安参会',    detail: '密集台阵研讨会 · 第2天' },
+      20: { type: 'away',   city: '西安', headline: '西安参会',    detail: '密集台阵研讨会 · 第3天' },
+      21: { type: 'away',   city: '西安', headline: '西安参会',    detail: '密集台阵研讨会 · 第4天' },
+      22: { type: 'away',   city: '成都', headline: '返京 · 成都', detail: 'CA4107 · 10:00 → 12:45' }
+    }
+  };
+
+  const MONTHS = ['2026-09','2026-10','2026-11','2026-12','2027-01','2027-02','2027-03','2027-04','2027-05','2027-06'];
 
   const FLIGHTS = [
     ['09-05', '北京 → 昆明', 'CA4172', '11:55', '15:25', '北京首都 T3', '昆明长水', '9993909148799'],
     ['09-07', '昆明 → 北京', 'CA4173', '17:05', '21:00', '昆明长水', '北京首都 T3', '9993903782365'],
     ['09-08', '北京 → 成都', 'CA1407', '16:45', '19:40', '北京首都 T3', '成都双流 T2', '9993939556716'],
     ['09-09', '成都 → 北京', 'CA4181', '18:00', '20:45', '成都双流 T2', '北京首都 T3', '9993939509710'],
-    ['09-22', '成都 → 北京', 'CA4107', '10:00', '12:45', '成都双流 T2', '北京首都 T3', '9996700925783'],
+    ['09-22', '成都 → 北京', 'CA4107', '10:00', '12:45', '成都双流 T2', '北京首都 T3', '9996700925783']
   ];
 
-  const WEEKS = [
-    [null, 1, 2, 3, 4, 5, 6],
-    [7, 8, 9, 10, 11, 12, 13],
-    [14, 15, 16, 17, 18, 19, 20],
-    [21, 22, 23, 24, 25, 26, 27],
-    [28, 29, 30, null, null, null, null],
-  ];
-  const WEEKDAYS = ['周一', '周二', '周三', '周四', '周五', '周六', '周日'];
-  // ==================== 数据结束 ====================
+  // ==================== 状态与工具 ====================
+  let curIdx = 0;
+  function curKey() { return MONTHS[curIdx]; }
+  function curY() { return parseInt(curKey().slice(0,4), 10); }
+  function curM() { return parseInt(curKey().slice(5,7), 10); }
+  function monthLabel(key) { var p = key.split('-'); return p[0] + '年' + parseInt(p[1],10) + '月'; }
 
-  const SCHEDULE = BUILTIN_SCHEDULE;
-
-    function escapeHtml(s) {
-    return String(s == null ? '' : s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  function escapeHtml(s) {
+    return String(s == null ? '' : s).replace(/[&<>"']/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; });
   }
-  function isRestDay(d) {
-    const dow = d % 7;
-    return dow === 5 || dow === 6 || !!HOLIDAYS[d];
+  function isRestDay(key, d) {
+    var dow = new Date(curY(), curM()-1, d).getDay();
+    var h = HOLIDAYS[key];
+    return dow === 0 || dow === 6 || (h && h[d]);
   }
-
-  function computePeriods() {
-    const days = Object.keys(SCHEDULE).map(Number).sort((a, b) => a - b);
-    const groups = [];
-    let cur = null;
-    for (const d of days) {
-      const city = (SCHEDULE[d].city || '').trim() || '—';
-      const contiguous = cur && d === cur.end + 1 && city === cur.city;
-      if (contiguous) {
-        cur.end = d;
-      } else {
-        if (cur) groups.push(cur);
-        cur = { start: d, end: d, city: city };
-      }
+  function getWeeks(key) {
+    var p = key.split('-').map(Number);
+    var offset = (new Date(p[0], p[1]-1, 1).getDay() + 6) % 7;
+    var days = new Date(p[0], p[1], 0).getDate();
+    var weeks = [];
+    var w = new Array(offset).fill(null);
+    for (var d = 1; d <= days; d++) { w.push(d); if (w.length === 7) { weeks.push(w); w = []; } }
+    if (w.length) { while (w.length < 7) w.push(null); weeks.push(w); }
+    return weeks;
+  }
+  function computePeriods(key) {
+    var m = SCHEDULE[key] || {};
+    var days = Object.keys(m).map(Number).sort(function(a,b){return a-b;});
+    var groups = []; var cur = null;
+    for (var i=0;i<days.length;i++) {
+      var d = days[i];
+      var city = (m[d].city || '').trim() || '—';
+      var cont = cur && d === cur.end + 1 && city === cur.city;
+      if (cont) { cur.end = d; } else { if (cur) groups.push(cur); cur = { start:d, end:d, city:city }; }
     }
     if (cur) groups.push(cur);
     return groups;
   }
 
+  // ==================== 渲染 ====================
   function render() {
-    renderStats();
-    renderStrip();
-    renderCalendar();
+    var key = curKey();
+    document.getElementById('month-label').textContent = monthLabel(key);
+    document.getElementById('strip-label').textContent = monthLabel(key) + ' · 日视图';
+    document.getElementById('btn-prev').disabled = curIdx === 0;
+    document.getElementById('btn-next').disabled = curIdx === MONTHS.length - 1;
+    renderStats(); renderStrip(); renderCalendar();
   }
 
   function renderStats() {
-    const days = Object.keys(SCHEDULE).length;
-    const cities = new Set(Object.values(SCHEDULE).map(e => (e.city || '').trim()).filter(Boolean));
-    document.getElementById('stat-periods').textContent = computePeriods().length;
+    var m = SCHEDULE[curKey()] || {};
+    var days = Object.keys(m).length;
+    var cities = {};
+    Object.keys(m).forEach(function(d){ var c=(m[d].city||'').trim(); if(c) cities[c]=1; });
+    document.getElementById('stat-periods').textContent = computePeriods(curKey()).length;
     document.getElementById('stat-days').textContent = days;
-    document.getElementById('stat-cities').textContent = cities.size;
+    document.getElementById('stat-cities').textContent = Object.keys(cities).length;
   }
 
   function renderStrip() {
-    const strip = document.getElementById('strip');
-    const ticks = document.getElementById('stripTicks');
+    var key = curKey();
+    var m = SCHEDULE[key] || {};
+    var h = HOLIDAYS[key] || {};
+    var days = new Date(curY(), curM(), 0).getDate();
+    var strip = document.getElementById('strip');
+    var ticks = document.getElementById('stripTicks');
+    strip.style.gridTemplateColumns = 'repeat(' + days + ', 1fr)';
+    ticks.style.gridTemplateColumns = 'repeat(' + days + ', 1fr)';
     strip.innerHTML = '';
-    const tickDays = [1, 5, 10, 15, 20, 25, 30];
-    for (let d = 1; d <= 30; d++) {
-      const seg = document.createElement('div');
+    var tickDays = [1,5,10,15,20,25,30].filter(function(d){return d<=days;});
+    for (var d=1; d<=days; d++) {
+      var seg = document.createElement('div');
       seg.className = 'seg';
-      const ev = SCHEDULE[d];
+      var ev = m[d];
       if (ev) seg.classList.add(ev.type);
-      else if (isRestDay(d)) seg.classList.add('weekend');
-      seg.title = '9月' + d + '日' + (HOLIDAYS[d] ? ' · ' + HOLIDAYS[d] : '') + (ev ? ' · ' + CHIP[ev.type] + ' · ' + ev.headline : '');
+      else if (isRestDay(key, d)) seg.classList.add('weekend');
+      seg.title = curM() + '月' + d + '日' + (h[d] ? ' · ' + h[d] : '') + (ev ? ' · ' + CHIP[ev.type] + ' · ' + ev.headline : '');
       strip.appendChild(seg);
     }
-    ticks.innerHTML = tickDays.map(d => `<span style="grid-column:${d}">${d}</span>`).join('');
+    ticks.innerHTML = tickDays.map(function(d){ return '<span style="grid-column:' + d + '">' + d + '</span>'; }).join('');
   }
 
   function renderCalendar() {
-    const body = document.getElementById('calBody');
+    var key = curKey();
+    var m = SCHEDULE[key] || {};
+    var h = HOLIDAYS[key] || {};
+    var body = document.getElementById('calBody');
     body.innerHTML = '';
-    WEEKS.forEach(week => {
-      const row = document.createElement('div');
+    getWeeks(key).forEach(function(week){
+      var row = document.createElement('div');
       row.className = 'cal-week';
-      week.forEach(d => {
-        const cell = document.createElement('div');
-        if (d == null) {
-          cell.className = 'day empty';
-        } else {
-          const ev = SCHEDULE[d];
-          let cls = 'day' + (isRestDay(d) ? ' weekend' : '');
-          let inner = '';
+      week.forEach(function(d){
+        var cell = document.createElement('div');
+        if (d == null) { cell.className = 'day empty'; }
+        else {
+          var ev = m[d];
+          var cls = 'day' + (isRestDay(key, d) ? ' weekend' : '');
+          var inner = '';
           if (ev) {
             cls += ' ' + ev.type;
-            inner = `<div class="dtop"><span class="dnum">${d}</span><span class="dchip">${CHIP[ev.type]}</span></div>` +
-                    `<div class="dbody"><b>${escapeHtml(ev.headline)}</b><span>${escapeHtml(ev.detail)}</span></div>`;
+            inner = '<div class="dtop"><span class="dnum">' + d + '</span><span class="dchip">' + CHIP[ev.type] + '</span></div>' +
+                    '<div class="dbody"><b>' + escapeHtml(ev.headline) + '</b><span>' + escapeHtml(ev.detail) + '</span></div>';
           } else {
             cls += ' no-entry';
-            const hol = HOLIDAYS[d] ? `<span class="hol">${HOLIDAYS[d]}</span>` : '';
-            inner = `<div class="dtop"><span class="dnum">${d}</span>${hol}</div>`;
+            var hol = h[d] ? '<span class="hol">' + h[d] + '</span>' : '';
+            inner = '<div class="dtop"><span class="dnum">' + d + '</span>' + hol + '</div>';
           }
-          cell.dataset.day = d;
-          inner += `<span class="edit-hint">${ev ? '✎' : '+'}</span>`;
           cell.className = cls;
           cell.innerHTML = inner;
         }
@@ -395,27 +430,23 @@
   }
 
   function renderFlights() {
-    const head = ['日期', '方向', '航班号', '起飞', '抵达', '起飞地', '抵达地', '票号'];
-    const thead = '<thead><tr>' + head.map(h => `<th>${h}</th>`).join('') + '</tr></thead>';
-    const tbody = '<tbody>' + FLIGHTS.map(f =>
-      `<tr>` +
-      `<td class="mono">${f[0]}</td>` +
-      `<td>${f[1]}</td>` +
-      `<td class="mono">${f[2]}</td>` +
-      `<td class="mono">${f[3]}</td>` +
-      `<td class="mono">${f[4]}</td>` +
-      `<td>${f[5]}</td>` +
-      `<td>${f[6]}</td>` +
-      `<td class="mono no">${f[7]}</td>` +
-      `</tr>`
-    ).join('') + '</tbody>';
+    var head = ['日期','方向','航班号','起飞','抵达','起飞地','抵达地','票号'];
+    var thead = '<thead><tr>' + head.map(function(h){return '<th>'+h+'</th>';}).join('') + '</tr></thead>';
+    var tbody = '<tbody>' + FLIGHTS.map(function(f){
+      return '<tr><td class="mono">'+f[0]+'</td><td>'+f[1]+'</td><td class="mono">'+f[2]+'</td><td class="mono">'+f[3]+'</td><td class="mono">'+f[4]+'</td><td>'+f[5]+'</td><td>'+f[6]+'</td><td class="mono no">'+f[7]+'</td></tr>';
+    }).join('') + '</tbody>';
     document.getElementById('flights').innerHTML = thead + tbody;
   }
 
-  // ---- 初始化 ----
-  document.getElementById('calHead').innerHTML = WEEKDAYS.map(w => '<div>' + w + '</div>').join('');
+  // ==================== 事件 ====================
+  document.getElementById('btn-prev').addEventListener('click', function(){ if (curIdx > 0) { curIdx--; render(); } });
+  document.getElementById('btn-next').addEventListener('click', function(){ if (curIdx < MONTHS.length - 1) { curIdx++; render(); } });
+
+  // ==================== 初始化 ====================
+  document.getElementById('calHead').innerHTML = WEEKDAYS.map(function(w){return '<div>'+w+'</div>';}).join('');
   renderFlights();
   render();
+
 </script>
 </body>
 </html>
