@@ -229,11 +229,7 @@
   </div>
 
   <div class="toolbar">
-    <a class="tb-btn primary" href="mailto:1060589007@qq.com?subject=Seismic%20Q%20%E8%AF%BE%E7%A8%8B%E8%A1%A8%20%E8%A1%8C%E7%A8%8B%E6%8F%90%E4%BA%A4">✉ 提交信息</a>
-    <button class="tb-btn" id="btn-edit">✎ 编辑</button>
-    <button class="tb-btn" id="btn-export">导出数据</button>
-    <button class="tb-btn" id="btn-reset">恢复默认</button>
-    <span class="tb-hint" id="tb-hint"></span>
+    <a class="tb-btn primary" href="https://lcnldw5hwk7e.feishu.cn/base/WrXfbOC5dazOdvsaoDnckMjSnke" target="_blank" rel="noopener">✏️ 在飞书编辑</a>
   </div>
 
   <div class="stats">
@@ -265,41 +261,9 @@
   </section>
 
   <div class="footnote">
-    节假日按国务院 2026 年安排标注（中秋节 9月25–27日，不调休）。如需更新或新增行程，请点击最上方的「提交信息」发送邮件。数据截至 <b>2026-09-07</b>。
+    节假日按国务院 2026 年安排标注（中秋节 9月25–27日，不调休）。如需更新或新增行程，请点击最上方的「在飞书编辑」进入多维表格。数据截至 <b>2026-09-07</b>。
   </div>
 </main>
-
-<!-- 编辑弹窗 -->
-<div class="modal" id="modal" hidden>
-  <div class="modal-card">
-    <div class="modal-head">
-      <span class="modal-title">编辑 <span id="modal-day"></span></span>
-      <button class="modal-close" id="modal-close" aria-label="关闭">×</button>
-    </div>
-    <div class="modal-body">
-      <label>类型</label>
-      <div class="seg" id="type-seg">
-        <button data-type="normal">正常</button>
-        <button data-type="away">学术沉淀期</button>
-        <button data-type="depart">当天沉淀</button>
-      </div>
-      <label>城市</label>
-      <input id="f-city" type="text" placeholder="如：昆明">
-      <label>标题</label>
-      <input id="f-headline" type="text" placeholder="如：出发 · 昆明">
-      <label>详情</label>
-      <input id="f-detail" type="text" placeholder="如：CA4172 · 11:55 → 15:25">
-    </div>
-    <div class="modal-foot">
-      <button class="danger" id="modal-clear">清除</button>
-      <span class="spacer"></span>
-      <button id="modal-cancel">取消</button>
-      <button class="primary" id="modal-save">保存</button>
-    </div>
-  </div>
-</div>
-
-<div class="toast" id="toast"></div>
 
 <script>
   // ==================== 数据（更新时改这里即可）====================
@@ -337,27 +301,9 @@
   const WEEKDAYS = ['周一', '周二', '周三', '周四', '周五', '周六', '周日'];
   // ==================== 数据结束 ====================
 
-  const STORAGE_KEY = 'seismic-q-schedule-v1';
-  let SCHEDULE = loadSchedule();
-  let editing = false;
-  let editingDay = null;
-  let currentType = 'normal';
+  const SCHEDULE = BUILTIN_SCHEDULE;
 
-  function loadSchedule() {
-    try {
-      const raw = localStorage.getItem(STORAGE_KEY);
-      if (raw) {
-        const obj = JSON.parse(raw);
-        if (obj && typeof obj === 'object' && !Array.isArray(obj)) return obj;
-      }
-    } catch (e) {}
-    return JSON.parse(JSON.stringify(BUILTIN_SCHEDULE));
-  }
-  function saveSchedule() {
-    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(SCHEDULE)); } catch (e) {}
-  }
-
-  function escapeHtml(s) {
+    function escapeHtml(s) {
     return String(s == null ? '' : s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   }
   function isRestDay(d) {
@@ -465,114 +411,6 @@
     ).join('') + '</tbody>';
     document.getElementById('flights').innerHTML = thead + tbody;
   }
-
-  // ---- 编辑 ----
-  function openModal(day) {
-    editingDay = day;
-    const ev = SCHEDULE[day];
-    currentType = ev ? ev.type : 'normal';
-    setSeg(currentType);
-    document.getElementById('modal-day').textContent = '9月' + day + '日';
-    document.getElementById('f-city').value = ev ? (ev.city || '') : '';
-    document.getElementById('f-headline').value = ev ? (ev.headline || '') : '';
-    document.getElementById('f-detail').value = ev ? (ev.detail || '') : '';
-    document.getElementById('modal').hidden = false;
-    document.getElementById('f-headline').focus();
-  }
-  function closeModal() {
-    document.getElementById('modal').hidden = true;
-    editingDay = null;
-  }
-  function setSeg(type) {
-    document.querySelectorAll('#type-seg button').forEach(b => b.classList.toggle('active', b.dataset.type === type));
-  }
-  function saveModal() {
-    const city = document.getElementById('f-city').value.trim();
-    const headline = document.getElementById('f-headline').value.trim();
-    const detail = document.getElementById('f-detail').value.trim();
-    if (currentType === 'normal') {
-      delete SCHEDULE[editingDay];
-    } else {
-      SCHEDULE[editingDay] = { type: currentType, city: city, headline: headline, detail: detail };
-    }
-    saveSchedule(); render(); closeModal();
-    toast(currentType === 'normal' ? '已清除该天' : '已保存');
-  }
-  function clearDay() {
-    delete SCHEDULE[editingDay];
-    saveSchedule(); render(); closeModal();
-    toast('已清除');
-  }
-
-  function toggleEdit() {
-    editing = !editing;
-    document.body.classList.toggle('editing', editing);
-    const btn = document.getElementById('btn-edit');
-    btn.textContent = editing ? '完成' : '✎ 编辑';
-    btn.classList.toggle('active', editing);
-    document.getElementById('tb-hint').textContent = editing ? '点击日历上的日期进行编辑（改动仅保存在本机浏览器）' : '';
-  }
-
-  function exportData() {
-    copyText(JSON.stringify(SCHEDULE, null, 2)).then(() => toast('已复制日程数据（JSON），可发给我更新'));
-  }
-  function resetData() {
-    if (!confirm('恢复默认？将清除本机浏览器里的所有修改。')) return;
-    SCHEDULE = JSON.parse(JSON.stringify(BUILTIN_SCHEDULE));
-    saveSchedule(); render();
-    toast('已恢复默认');
-  }
-
-  function copyText(text) {
-    return new Promise(resolve => {
-      const fallback = () => {
-        const ta = document.createElement('textarea');
-        ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
-        document.body.appendChild(ta); ta.focus(); ta.select();
-        try { document.execCommand('copy'); } catch (e) {}
-        document.body.removeChild(ta); resolve();
-      };
-      if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(text).then(resolve).catch(fallback);
-      } else {
-        fallback();
-      }
-    });
-  }
-
-  let toastTimer = null;
-  function toast(msg) {
-    const t = document.getElementById('toast');
-    t.textContent = msg;
-    t.classList.add('show');
-    clearTimeout(toastTimer);
-    toastTimer = setTimeout(() => t.classList.remove('show'), 2400);
-  }
-
-  // ---- 事件绑定 ----
-  document.getElementById('btn-edit').addEventListener('click', toggleEdit);
-  document.getElementById('btn-export').addEventListener('click', exportData);
-  document.getElementById('btn-reset').addEventListener('click', resetData);
-
-  document.getElementById('calBody').addEventListener('click', function (e) {
-    if (!editing) return;
-    const cell = e.target.closest('.day');
-    if (!cell || cell.classList.contains('empty') || !cell.dataset.day) return;
-    openModal(Number(cell.dataset.day));
-  });
-
-  document.querySelectorAll('#type-seg button').forEach(b => {
-    b.addEventListener('click', () => { currentType = b.dataset.type; setSeg(currentType); });
-  });
-  document.getElementById('modal-save').addEventListener('click', saveModal);
-  document.getElementById('modal-clear').addEventListener('click', clearDay);
-  document.getElementById('modal-cancel').addEventListener('click', closeModal);
-  document.getElementById('modal-close').addEventListener('click', closeModal);
-  document.getElementById('modal').addEventListener('click', function (e) { if (e.target === this) closeModal(); });
-
-  document.addEventListener('keydown', function (e) {
-    if (e.key === 'Escape') closeModal();
-  });
 
   // ---- 初始化 ----
   document.getElementById('calHead').innerHTML = WEEKDAYS.map(w => '<div>' + w + '</div>').join('');
