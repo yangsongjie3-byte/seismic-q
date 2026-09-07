@@ -116,7 +116,7 @@
   .tb-btn.active { background: var(--brand); color: #fff; border-color: var(--brand); }
   .tb-hint { font-size: 12px; color: var(--ink-3); }
 
-    .month-nav { display: flex; align-items: center; justify-content: center; gap: 16px; margin-top: 22px; }
+    .month-nav { display: flex; align-items: center; justify-content: flex-start; gap: 12px; margin-top: 26px; }
   .month-label { font-family: var(--font-display); font-size: 18px; font-weight: 600; min-width: 128px; text-align: center; }
   .tb-btn:disabled { opacity: 0.4; cursor: default; }
 .stats { display: flex; gap: 12px; margin: 22px 0 0; flex-wrap: wrap; }
@@ -235,13 +235,7 @@
     <a class="tb-btn primary" href="https://lcnldw5hwk7e.feishu.cn/share/base/form/shrcnM4SHr2Pjzqww4oBmwU9oug" target="_blank" rel="noopener">📝 提交更新申请</a>
   </div>
 
-      <div class="month-nav">
-      <button class="tb-btn" id="btn-prev">‹ 上月</button>
-      <span class="month-label" id="month-label">2026年9月</span>
-      <button class="tb-btn" id="btn-next">下月 ›</button>
-    </div>
-
-<div class="stats">
+  <div class="stats">
     <div class="stat"><div class="num" id="stat-periods">4</div><div class="lab">段学术沉淀期</div></div>
     <div class="stat"><div class="num" id="stat-days">10</div><div class="lab">标记天数</div></div>
     <div class="stat"><div class="num" id="stat-cities">3</div><div class="lab">涉及城市</div></div>
@@ -255,6 +249,12 @@
 </header>
 
 <main class="wrap">
+    <div class="month-nav">
+    <button class="tb-btn" id="btn-prev">‹ 上月</button>
+    <span class="month-label" id="month-label">2026年9月</span>
+    <button class="tb-btn" id="btn-next">下月 ›</button>
+  </div>
+
   <div class="cal-scroll">
     <div class="cal">
       <div class="cal-head" id="calHead"></div>
