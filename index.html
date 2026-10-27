@@ -385,9 +385,8 @@
     var groups = []; var cur = null;
     for (var i=0;i<days.length;i++) {
       var d = days[i];
-      var city = (m[d].city || '').trim() || '—';
-      var cont = cur && d === cur.end + 1 && city === cur.city;
-      if (cont) { cur.end = d; } else { if (cur) groups.push(cur); cur = { start:d, end:d, city:city }; }
+      var cont = cur && d === cur.end + 1;
+      if (cont) { cur.end = d; } else { if (cur) groups.push(cur); cur = { start:d, end:d }; }
     }
     if (cur) groups.push(cur);
     return groups;
