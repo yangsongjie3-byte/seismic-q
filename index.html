@@ -322,7 +322,15 @@
   ];
 
   // ==================== 状态与工具 ====================
-  let curIdx = 0;
+  // 初始定位到“查阅时间”所在的月份；若当前时间超出课程表范围，则就近取首月或末月
+  let curIdx = (function(){
+    var now = new Date();
+    var key = now.getFullYear() + '-' + ('0' + (now.getMonth() + 1)).slice(-2);
+    var i = MONTHS.indexOf(key);
+    if (i >= 0) return i;
+    if (key < MONTHS[0]) return 0;
+    return MONTHS.length - 1;
+  })();
   function curKey() { return MONTHS[curIdx]; }
   function curY() { return parseInt(curKey().slice(0,4), 10); }
   function curM() { return parseInt(curKey().slice(5,7), 10); }
