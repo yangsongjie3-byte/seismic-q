@@ -311,11 +311,11 @@
     },
     '2026-10': {
       16: { type: 'depart', city: '南昌', headline: '出发 · 南昌', detail: 'CA1537 · 08:30 → 10:55' },
-      17: { type: 'away',   city: '南昌', headline: '南昌',       detail: '全天' },
-      18: { type: 'away',   city: '南昌', headline: '南昌',       detail: '全天' },
-      19: { type: 'away',   city: '南昌', headline: '南昌',       detail: '全天' },
-      20: { type: 'away',   city: '南昌', headline: '南昌',       detail: '全天' },
-      21: { type: 'away',   city: '南昌', headline: '南昌',       detail: '全天' },
+      17: { type: 'depart', city: '杭州', headline: '南昌 → 杭州', detail: '全天' },
+      18: { type: 'away',   city: '杭州', headline: '杭州',       detail: '全天' },
+      19: { type: 'away',   city: '杭州', headline: '杭州',       detail: '全天' },
+      20: { type: 'away',   city: '杭州', headline: '杭州',       detail: '全天' },
+      21: { type: 'away',   city: '杭州', headline: '杭州',       detail: '全天' },
       22: { type: 'away',   city: '杭州', headline: '返京 · 杭州', detail: 'MU5189 · 杭州 → 大兴' },
       30: { type: 'depart', city: '武汉', headline: '出发 · 武汉', detail: '火车 · 08:30 → 12:00' },
       31: { type: 'away',   city: '武汉', headline: '武汉',       detail: '全天' }
@@ -400,7 +400,7 @@
     document.getElementById('strip-label').textContent = monthLabel(key) + ' · 日视图';
     document.getElementById('btn-prev').disabled = curIdx === 0;
     document.getElementById('btn-next').disabled = curIdx === MONTHS.length - 1;
-    renderStats(); renderStrip(); renderCalendar();
+    renderStats(); renderStrip(); renderCalendar(); renderFlights();
   }
 
   function renderStats() {
@@ -473,9 +473,11 @@
   function renderFlights() {
     var head = ['日期','方向','航班号','起飞','抵达','起飞地','抵达地','票号'];
     var thead = '<thead><tr>' + head.map(function(h){return '<th>'+h+'</th>';}).join('') + '</tr></thead>';
-    var tbody = '<tbody>' + FLIGHTS.map(function(f){
+    var mm = curKey().slice(5, 7);
+    var rows = FLIGHTS.filter(function(f){ return f[0].slice(0, 2) === mm; });
+    var tbody = '<tbody>' + (rows.length ? rows.map(function(f){
       return '<tr><td class="mono">'+f[0]+'</td><td>'+f[1]+'</td><td class="mono">'+f[2]+'</td><td class="mono">'+f[3]+'</td><td class="mono">'+f[4]+'</td><td>'+f[5]+'</td><td>'+f[6]+'</td><td class="mono no">'+f[7]+'</td></tr>';
-    }).join('') + '</tbody>';
+    }).join('') : '<tr><td colspan="8" style="text-align:center;color:var(--ink-3);padding:18px 0;">本月暂无航班</td></tr>') + '</tbody>';
     document.getElementById('flights').innerHTML = thead + tbody;
   }
 
@@ -485,7 +487,6 @@
 
   // ==================== 初始化 ====================
   document.getElementById('calHead').innerHTML = WEEKDAYS.map(function(w){return '<div>'+w+'</div>';}).join('');
-  renderFlights();
   render();
 
 </script>
